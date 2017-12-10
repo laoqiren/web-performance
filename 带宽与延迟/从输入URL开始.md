@@ -23,4 +23,5 @@ http://www.example.com:80/path/to/myfile.html?key1=value1&key2=value2#SomewhereI
 * 找到关系后，本地DNS返回结果给客户机，并进行相应的缓存
 
 ![http://blog.51cto.com/attachment/201203/175333937.jpg](http://blog.51cto.com/attachment/201203/175333937.jpg)
+
 图片来源：51cto
