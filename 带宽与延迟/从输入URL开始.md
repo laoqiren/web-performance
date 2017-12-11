@@ -37,10 +37,6 @@ http://www.example.com:80/path/to/myfile.html?key1=value1&key2=value2#SomewhereI
 可以清晰地看到这个迭代查询的过程。
 
 ## Socket发送数据
-首先来看一张图：
-![](http://7xsi10.com1.z0.glb.clouddn.com/layers.png)
-
-## Socket发送数据
 浏览器得到IP地址和端口号以后，就会调用系统库函数`socket`，请求一个TCP流套接字，下面是之后的逐层封装过程：
 
 ---
