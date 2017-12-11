@@ -52,7 +52,7 @@ http://www.example.com:80/path/to/myfile.html?key1=value1&key2=value2#SomewhereI
 * 蜂窝移动网络
 ![](http://7xsi10.com1.z0.glb.clouddn.com/routers.png)
 
-数据经过一层层封装，经过本地网络，传送到网络的下一个节点，再到管理该主机所在子网的路由器，这个路由器经过区域内路由(Intra-AS routing)算法（如RIP)将数据发送给`自治区域`(autonomous system, 缩写 AS，如运营商区域网络)的边界路由（网关），再通过区域间路由（Inter-AS routing）算法（如BGP)找到其他域的边界路由，再经过区域内路由算法，知道找到目的主机。
+数据经过一层层封装，经过本地网络，传送到网络的下一个节点，再到管理该主机所在子网的路由器，这个路由器经过区域内路由(Intra-AS routing)算法（如RIP)将数据发送给`自治区域`(autonomous system, 缩写 AS，如运营商区域网络)的边界路由（网关），再通过区域间路由（Inter-AS routing）算法（如BGP)找到其他域的边界路由，再经过区域内路由算法，直到找到目的主机。
 
 一路上经过的这些路由器会从IP数据报头部里提取出目标地址，并将封包正确地路由到下一个目的地。IP数据报头部 `time to live (TTL)` 域的值每经过一个路由器就减1，如果封包的TTL变为0，或者路由器由于网络拥堵等原因封包队列满了，那么这个包会被路由器丢弃。
 

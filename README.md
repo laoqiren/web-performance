@@ -13,6 +13,7 @@
     * [repaint与reflow](/网页渲染原理/repaint与reflow.md)
 * [带宽与延迟](/带宽与延迟/README.md)
     * [从输入URL开始](/带宽与延迟/从输入URL开始.md)
+    * 带宽限制
     * TCP/IP性能细节
     * 针对性优化
 * [缓存机制](/缓存机制/README.md)
