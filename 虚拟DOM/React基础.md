@@ -3,7 +3,7 @@
 参照React官方文档：[https://reactjs.org/docs/](https://reactjs.org/docs/)
 
 ## 组件化
-React采用组件化的思想构建UI，并提供`jsx`语法创建元素，可以通过两者方式创建React组件：
+React采用组件化的思想构建UI，并提供`jsx`语法创建元素，可以通过两种方式创建React组件：
 ```js
 //函数
 function Welcome(props) {
@@ -104,6 +104,6 @@ class  Child extends React.Component {
 * 把上面所记录的差异应用到第一步所构建的真正的DOM树上，视图就更新了
 
 网上看到的一篇文章，讲的`preact`的虚拟DOM实现，和React原理差不多：
-![](http://efe.baidu.com/blog/the-inner-workings-of-virtual-dom/1.png)
+![](http://7xsi10.com1.z0.glb.clouddn.com/1.png)
 
 参照原文：[https://medium.com/@rajaraodv/the-inner-workings-of-virtual-dom-666ee7ad47cf](https://medium.com/@rajaraodv/the-inner-workings-of-virtual-dom-666ee7ad47cf)
