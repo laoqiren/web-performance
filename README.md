@@ -28,6 +28,10 @@
     * Webpack
     * CDN
 * Virtual DOM
+    * [React基础](/虚拟DOM/React基础.md)
+    * 实现
+    * diff算法
+    * 性能考虑
 * HTTP2
 * HTTPS性能影响
 * 高性能JavaScript
