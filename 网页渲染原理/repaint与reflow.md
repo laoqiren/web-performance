@@ -114,3 +114,10 @@ $("#block2").animate({marginLeft:50});
 
 ### 动画硬件加速
 // todo
+
+
+**参考**
+
+[https://www.sitepoint.com/10-ways-minimize-reflows-improve-performance/](https://www.sitepoint.com/10-ways-minimize-reflows-improve-performance/)
+
+[http://www.blogjava.net/BearRui/archive/2010/05/10/web_performance_repaint_relow.html](http://www.blogjava.net/BearRui/archive/2010/05/10/web_performance_repaint_relow.html)
