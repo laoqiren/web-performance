@@ -50,8 +50,8 @@
     * GC机制
     * 算法与流程
     * Web worker
-* PWA与离线应用
 * WebAssembly
+* PWA与离线应用
 * 即时运用与P2P
 * Node.js性能优化
 * 集群与负载均衡
