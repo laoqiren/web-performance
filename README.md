@@ -32,12 +32,13 @@
     * 实现
     * diff算法
     * 性能考虑
+* SPA与SSR
 * HTTP2
 * HTTPS性能影响
     * TLS原理
     * 性能影响
 * 高性能JavaScript
-* PWA
+* PWA与离线应用
 * WebAssembly
 * 即时运用与P2P
 * Node.js性能优化
