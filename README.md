@@ -44,8 +44,8 @@
 * HTTPS性能影响
     * TLS原理
     * 性能影响
-* 高性能JavaScript
-    * V8与JIT
+* [高性能JavaScript](/高性能JavaScript/README.md)
+    * [V8与JIT](/高性能JavaScript/V8与JIT.md)
     * 内存泄露
     * GC机制
     * 算法与流程
