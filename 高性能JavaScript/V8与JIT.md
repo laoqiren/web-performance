@@ -16,5 +16,13 @@ V8采取了一系列优化机制提升JS效率，我们将从`JIT`、`垃圾回�
 JIT运用的地方很多，如`.NET`、`JVM`、`PyPy`等。在多个JS引擎均使用JIT技术提升js执行速度：
 ![https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/e4c17eec-5fcf-4b37-aa90-4180d4ac4dca/03-perf-graph10-opt.png](https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/e4c17eec-5fcf-4b37-aa90-4180d4ac4dca/03-perf-graph10-opt.png)
 
+### 解释与编译
+通常有两种方法将高级语言代码转换为机器代码，`解释`与`编译`。
+
+解释器一行一行的翻译代码，因此我们不需要等待所有代码都编译完成便可开始执行，能够尽快看到执行效果，这非常适合Web的场景；但是解释执行的问题是，解释器可能针对同一行代码重复翻译多次，如循环语句。然后解释器在翻译过程中不能花太多时间在各种优化机制上面。
+
+编译的方式则相反，其在执行前将完整的程序翻译成机器码，执行的时候就不用考虑翻译的事情，所以就不会出现同一段代码重复翻译的问题。然后编译方式可以在翻译的时候花更多的事情在优化上面。
+
+### 结合两种方式
 
 // todo
