@@ -83,3 +83,15 @@ function arraySum(arr) {
 ![https://hacks.mozilla.org/files/2017/02/02-10-jit_loop02-768x488.png](https://hacks.mozilla.org/files/2017/02/02-10-jit_loop02-768x488.png)
 
 有些`JIT`实现会在这方面做更进一步优化，比如firefox定义了一种只含有整数的特别数组，如果`arr`满足条件，上面图中每次执行前关于`arr[i]`的类型检查也可省去。
+
+### 存在的问题
+上面的优化策略也会带来一些新的问题，其中之一就是会带来额外的开销：
+
+* 优化和弃优化的开销
+* `monitor`用于记录以及弃优化发生时恢复先前信息的开销
+* 存储`baseline`和优化版本的代码需要耗费一定内存
+
+针对上面的问题，还可以通过进一步优化来解决，最近一段时间炒得火热的`WebAssembly`便是一种手段。我们会在下一章节进一步探讨。
+
+此篇文章主要内容翻译自文章:
+[https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/](https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/)
