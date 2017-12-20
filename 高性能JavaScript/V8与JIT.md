@@ -36,7 +36,7 @@ JIT运用的地方很多，如`.NET`、`JVM`、`PyPy`等。在多个JS引擎均�
 
 ![https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/02-05-jit06.png](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/02-05-jit06.png)
 
-js引擎会为图示中函数的每一行代码生成一个"桩"，"桩"中包含代码行号和变量类型信息，当`monitor`发现同一段代码被执行，且其中变量类型相同，则会输出它之前已经编译好版本。
+js引擎会为图示中函数的每一行代码生成一个"桩"，"桩"中包含代码行号和变量类型信息，当`monitor`发现同一段代码被执行，且其中变量类型相同，则会输出它之前已经编译好版本。
 
 编译器还能做一系列的优化工作，优化工作会花费一定的时间从而阻塞代码执行，但是如果某段代码执行的频率确实很高，那么牺牲一定时间来做这些优化工作是值得的。
 
@@ -57,4 +57,29 @@ js引擎会为图示中函数的每一行代码生成一个"桩"，"桩"中包�
 
 所以，浏览器在某段代码在优化和弃优化直接徘徊到一定次数后，将会放弃优化。
 
-// todo
+### 优化实例：类型特化
+
+`Optimizing compiler`针对代码优化有许多手段，其中比较典型的一个例子就是`类型特化`(`type specialization`)，比如下面一段代码：
+```js
+function arraySum(arr) {
+  var sum = 0;
+  for (var i = 0; i < arr.length; i++) {
+    sum += arr[i];
+  }
+}
+```
+上面的代码看似简单，但是由于js是动态类型语言，在执行上面代码时，需要做许多额外的工作，当上面的代码被标记为`warm`时，将被交给`baseline compiler`，`baseline compiler`会为上面的每一行代码创建"桩"，比如上面的`sum += arr[i]`，来表示整形相加合赋值操作。
+
+但是，我们不能保证`sum`何`arr[i]`一定是整形，因为有可能`arr`的某一项并不是整形，如果其中一项是字符串类型，那么上面的加法操作执行策略就会不一样，需要被编译成新的版本。`JIT`的策略是对每一段代码产生多个"桩"，如果该段代码在执行期间变量类型不变，只会产生一个"桩"，否则会有多个"桩"。这样，该段代码每次执行前都需要进行一个"决策"过程:
+
+![https://hacks.mozilla.org/files/2017/02/02-08-decision_tree01-768x394.png](https://hacks.mozilla.org/files/2017/02/02-08-decision_tree01-768x394.png)
+
+这样引擎将会花大量时间在询问相同问题（决策）过程中：
+
+![https://hacks.mozilla.org/files/2017/02/02-09-jit_loop02-768x496.png](https://hacks.mozilla.org/files/2017/02/02-09-jit_loop02-768x496.png)
+
+而`Optimizing compiler`的一个优化策略就是简化这样一个决策过程，对于其中一些变量的类型检查提前到循环之前:
+
+![https://hacks.mozilla.org/files/2017/02/02-10-jit_loop02-768x488.png](https://hacks.mozilla.org/files/2017/02/02-10-jit_loop02-768x488.png)
+
+有些`JIT`实现会在这方面做更进一步优化，比如firefox定义了一种只含有整数的特别数组，如果`arr`满足条件，上面图中每次执行前关于`arr[i]`的类型检查也可省去。
