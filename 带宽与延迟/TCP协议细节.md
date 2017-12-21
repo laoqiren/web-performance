@@ -53,6 +53,19 @@ TCP需要提供以下功能：
 四次挥手的抓包过程这里就省略了，一图以概之：
 ![http://7xsi10.com1.z0.glb.clouddn.com/tcpbye.jpg](http://7xsi10.com1.z0.glb.clouddn.com/tcpbye.jpg)
 
-图中`2MSL`的`TIME-WAIT`用以保证对方受到最后的ACK信息。
+图中`2MSL`的`TIME-WAIT`用以保证对方接收到最后的ACK信息。
 
 ## 流量控制
+在传输过程中，有可能出现发送方的速度大于接收方能够接受的速度，就会导致接收方负载过重而导致拥堵，流量控制酒就显得很重要。
+
+TCP的流量控制通过接收窗口大小字段实现，该字段给出接收方的接收缓冲区当前可用字节，即接收方进行流量控制，由16位表示，所以最大为`65535`字节，但是通过抓包发现有些包的窗口字段大小远远超过此值，原因是`RFC 1323`定义的`窗口缩放（TCP Window Scaling）`机制。有关TCP窗口缩放配置参考维基百科：[https://en.wikipedia.org/wiki/TCP_window_scale_option](https://en.wikipedia.org/wiki/TCP_window_scale_option)通过开启窗口缩放，可以更充分利用带宽，提高性能。
+
+在建立连接时即有接收窗口协商，在传输过程中，`接收窗口(rwnd)`大小可以随时改变。发送方实际发送字节数还与`拥塞控制`有关，`拥塞窗口(cwnd)`由发送方根据网络拥塞程度设定，最终的发送窗口为两者较小值：
+
+```
+发送窗口=Min[rwnd,cwnd]
+```
+
+## 拥塞控制
+
+// todo
