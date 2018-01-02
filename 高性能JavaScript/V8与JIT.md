@@ -6,7 +6,7 @@ Google将webkit中集成的js引擎替换为V8：
 
 我们熟悉的Node.js就使用了V8引擎来解析执行js，[https://benchmarksgame.alioth.debian.org/u64q/compare.php?lang=node](https://benchmarksgame.alioth.debian.org/u64q/compare.php?lang=node)可以通过此链接查看Node与其他语言的基准测试比较。可以看到在V8中执行的JS可以是吊打其他脚本语言，与Java相比也相差不大。
 
-V8采取了一系列优化机制提升JS效率，我们将从`JIT`、`垃圾回收`等方面去了解V8内核。
+V8采取了一系列优化机制提升JS效率，包括JIT编译 （JIT Compile）、垃圾回收（Garbage Collection）、内嵌缓存（Inline Cache）、隐藏类等。我们将从`JIT`、`垃圾回收`等方面去了解V8内核。参考V8项目WIKI:[V8的设计理念](https://github.com/v8/v8/wiki/Design%20Elements)
 
 ## JIT
 即时编译（英语：Just-in-time compilation），动态编译的一种形式，是一种提高程序运行效率的方法。通常，程序有两种运行方式：`静态编译`与`动态解释`。静态编译的程序在执行前全部被翻译为机器码，而解释执行的则是一句一句边运行边翻译。
