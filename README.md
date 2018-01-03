@@ -1,6 +1,6 @@
 # Web性能
 
-从底层计算机网络协议到应用层各个方面去理解Web性能。
+从底层计算机网络协议到应用层各个方面去理解Web性能，此项目可能会涉及到网络、操作系统、编译原理、工程开发等知识，欢迎贡献。
 
 点击右上角的 **Watch** 订阅项目实时获取更新，点击 **Star** 收藏项目。
 
@@ -46,8 +46,9 @@
     * 性能影响
 * [高性能JavaScript](/高性能JavaScript/README.md)
     * [V8与JIT](/高性能JavaScript/V8与JIT.md)
-    * 内存泄露
+    * [内存管理](/高性能JavaScript/内存管理.md)
     * GC机制
+    * 内存泄露
     * 算法与流程
     * Web worker
 * WebAssembly
