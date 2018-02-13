@@ -26,7 +26,7 @@
     * [图片资源优化](/静态资源/图像优化.md)
     * 离线应用资源
     * [Webpack](/静态资源/Webpack.md)
-    * CDN
+    * [CDN](/静态资源/CDN.md)
 * Virtual DOM
     * [React基础](/虚拟DOM/React基础.md)
     * 实现
