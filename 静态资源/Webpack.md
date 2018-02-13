@@ -127,7 +127,7 @@ Person.6b9b0bed699a1861b41a.js     545 kB       1  [emitted]  [big]  Person
 
 我们发现，虽然`Person.js`被单独打包，但是`app.js`的打包文件大小没变，它依旧包含了`Person.js`的代码，而我们想要其不包含两个打包文件的公共部分。
 
-### 提前重复部分
+### 提取重复部分
 针对上面的问题，我们使用`CommonsChunkPlugin`插件来提取重复部分
 
 ```js
