@@ -82,6 +82,8 @@ DH握手虽然需要使用两种不同的算法，但是它具有前向保密性
 
 ### Ephemeral Diffie-Hellman handshake
 
-`Diffie-Hellman`握手使用两种机制：一个用于密钥交换，一个用于验证服务器。其主要的特征是使用`Diffie-Hellman`密钥交换算法。
+`Diffie-Hellman`握手使用两种机制：一个用于密钥交换，一个用于验证服务器。其主要的特征是使用`Diffie-Hellman`密钥交换算法。
 
 具体握手过程这里不再详述。请参考具体规范或其他文章。
+
+其中涉及的更详细的过程、原理和安全等问题参考《HTTPS权威指南》。
