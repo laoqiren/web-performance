@@ -130,6 +130,15 @@ TCP保证各个分组之间的正确顺序，上面的选择重传例子中，�
 setsockopt(fd, IPPROTO_TCP, TCP_QUICKACK, (int[]){1}, sizeof(int));
 ```
 
+### 慢启动重启
+
+除了调节新连接的传输速度，TCP 还实现了 `SSR`(Slow-Start Restart，慢启动重 启)机制。这种机制会在连接空闲一定时间后重置连接的拥塞窗口。道理很简单， 在连接空闲的同时，网络状况也可能发生了变化，为了避免拥塞，理应将拥塞窗 口重置回“安全的”默认值。
+毫无疑问，SSR 对于那些会出现突发空闲的长周期 TCP 连接(比如 HTTP 的 keep-alive 连接)有很大的影响。因此，我们建议在服务器上禁用 SSR。在 Linux 平台，可以通过如下命令来检查和禁用 `SSR`:
+```
+$> sysctl net.ipv4.tcp_slow_start_after_idle
+$> sysctl -w net.ipv4.tcp_slow_start_after_idle=0
+```
+
 ### `Nagle`算法与`TCP_NODELAY`
 
 `Nagle`算法用于避免太多的小数据包传输，减轻网络负载，比如有可能发送端每次只发送一个字节的包。
