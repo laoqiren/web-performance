@@ -28,7 +28,10 @@
     * [Webpack](/静态资源/Webpack.md)
     * [CDN](/静态资源/CDN.md)
 * 响应式编程
-    * Vue的方式
+    * [Pub/Sub方式](/响应式编程/PubSub方式.md)
+    * [Vue的方式](/响应式编程/Vue方式.md)
+    * 脏检查机制
+    * Rx
 * Virtual DOM
     * [React基础](/虚拟DOM/React基础.md)
     * 实现
