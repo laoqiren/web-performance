@@ -167,22 +167,23 @@ compile(){
             if (node.nodeType === 1) {  // 元素节点
                 let nodeAttr = node.attributes; // 获取dom上的所有属性,是个类数组
                 Array.from(nodeAttr).forEach(attr => {
-                    let name = attr.name;   // v-model  type
+                    let name = attr.name;   // l-model  type
                     let exp = attr.value;   // c        text
                     if (name.includes('l-')){
                         node.value = vm[exp];   // this.c 为 2
                         // 数据双向绑定
                         node.addEventListener('input', e => {
-                        let newVal = e.target.value;
-                        // 相当于给this.c赋了一个新值
-                        // 而值的改变会调用set，set中又会调用notify，notify中调用watcher的update方法实现了更新
-                        vm[exp] = newVal;   
-                    });
+                          let newVal = e.target.value;
+                          // 相当于给this.c赋了一个新值
+                          // 而值的改变会调用set，set中又会调用notify，notify中调用watcher的update方法实现了更新
+                          vm[exp] = newVal;   
+                        });
+                        // 监听变化
+                        new Watcher(vm, exp, function(newVal) {
+                            node.value = newVal;   // 当watcher触发时会自动将内容放进输入框中
+                        });
                     }
-                    // 监听变化
-                    new Watcher(vm, exp, function(newVal) {
-                        node.value = newVal;   // 当watcher触发时会自动将内容放进输入框中
-                    });
+                    
                     
                     
                 });
