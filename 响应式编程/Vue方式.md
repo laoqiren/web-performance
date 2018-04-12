@@ -229,4 +229,5 @@ class Dep {
 * 当属性变化时，首先会调用属性的`setter`，`setter`会通知`dep`实例，`dep`实例接到通知后再广播给所有`watcher`
 * 所有`watcher`接到通知后，调用自己的`update()`方法，如果该`watcher`监听的属性发生了变化，就要调用相应的方法更新`UI`
 
+完整代码见：[https://github.com/laoqiren/Reactive/blob/master/vue.js](https://github.com/laoqiren/Reactive/blob/master/vue.js)
 ## 存在的问题
