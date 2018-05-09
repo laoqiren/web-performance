@@ -250,6 +250,67 @@ Time: 1195ms
 
 我们可以看到，`City.js`被单独打包到`0.[chunkhash].js`。然后我们通过devtools网络工具可以查看到首页渲染时并没有加载这个文件，而是当用于点击按钮后再加载这个文件。
 
+## Tree-Shaking
+`Tree-Shaking`本质上是一种`DCE（dead code elimination)`即无用代码消除，在《编译原理》中的代码优化部分中，对此也有阐述，比如：
+```js
+let func = () => {
+    let a = 1;
+    function unused(){
+        //
+    }
+    return a;
+    let b = 2,
+        c = 3;
+}
+```
+上面代码中`unused`函数没有使用到，而`return a`后面的代码永远不会到达，这个时候就需要我们进行代码的优化，在[](资源压缩)小节中我们对此有了一些解释，一般使用`uglify`工具进行代码的压缩。
+
+但是对于模块系统来说，`uglify`的方式对无用的模块和跨文件的`DCE`是无法进行优化的：
+
+```js
+// src/math.js
+export function square(x) {
+  return x * x;
+}
+
+export function cube(x) {
+  return x * x * x;
+}
+
+// src/main.js
+import { cube } from './math.js';
+```
+可以看到在`man.js`中只引用了`math.js`模块导出的`cube`方法，`square`方法并没有被引用，在最后的bundle中理论不应该包含`square`的代码。
+
+`Webpack`的`Tree-Shaking`依赖于`ESM`的静态模块分析机制，模块的依赖分析实例化和运行是独立的，这样可以静态分析模块的依赖关系，从而在运行前就可以做一些优化。
+
+### 具有副作用的模块
+
+上面的代码，`webpack`默认是不会删除`square`代码的，因为考虑到其可能具有副作用，如改变全局对象的原型方法。往往许多情况下`Tree-Shaking`的优化能力是有限的。通常我们在这方面的优化措施有两个:
+
+**按需加载**
+
+举个例子就是`ant-design`组件的引用：
+```js
+// 方式1
+import { Button } from 'antd';
+
+// 方式2
+import { Button } from 'antd/lib/button';
+import 'antd/lib/style';
+```
+可以看到方式2才是更合理的加载方式，针对这方面优化，`antd`提供了方式1代码到方式2代码的自动转换工具[https://github.com/ant-design/babel-plugin-import](https://github.com/ant-design/babel-plugin-import)
+
+还有一种按需加载就是前面讲的动态导入与懒加载机制。
+
+**标记为纯的模块**
+
+这方面直接参考`webpack`的文档: [https://doc.webpack-china.org/guides/tree-shaking/](https://doc.webpack-china.org/guides/tree-shaking/)
+
+## 打包性能优化
+
+如何提升在开发环境和构建时的打包性能呢？
+// todo
 
 ## 其他
 
