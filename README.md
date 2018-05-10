@@ -61,6 +61,7 @@
 * 即时运用与P2P
 * Node.js性能优化
     * [多进程架构](/Node性能优化/多进程架构.md)
+    * [Node中的多进程](/Node性能优化/Node中的多进程.md)
     * [异步I/O](/Node性能优化/异步IO.md)
     * Buffer与Stream
 * 集群与负载均衡
