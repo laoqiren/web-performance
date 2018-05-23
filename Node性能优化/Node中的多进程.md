@@ -23,7 +23,7 @@
 
 `child_process`主要提供用于创建子进程的能力和有关子进程的信和和控制。
 
-Node中的`fork()`与linux编程中的有所区别。Node中的`fork`并不是主进程的一个拷贝，而是拥有独立内存空间，独立的V8实例；然后fork出来的进程和主进程会有额外的`IPC通道`用于进程间通信。
+Node中的`fork()`与linux编程中的有所区别。Node中的`fork`并不是主进程的一个拷贝，而是拥有独立内存空间，独立的V8实例；然后`fork`出来的进程和主进程会有额外的`IPC通道`用于进程间通信。
 
 Node中的`exec`和`spwan`和linux编程下的也有区别，在上一节中我们讲这两个函数簇会用其他进程替换掉当前进程，而在Node中是另起一个进程执行指定的程序。
 
@@ -33,7 +33,7 @@ Node中`exec`和`spawn`的区别：
 * `spwan`在未配置`shell: true`情况下直接执行文件，而不会起一个`shell`用于执行命令
 * `exec`提供额外的`callback`参数，用于缓存子进程的数据结束时一次性返回给主进程，适合返回数据较小的场景，如只返回状态码
 
-`exec`会先起一个`shell`，再执行命令，而`execFile`和其类似，但是不会先起一个shell。
+`exec`会先起一个`shell`，再执行命令，而`execFile`和其类似，但是不会先起一个`shell`。
 
 `spawn`和linux编程下的`popen()`很类似，而`exec`和linux编程下的`system()`类似。
 
@@ -79,7 +79,7 @@ process.on('message', (m, server) => {
 此种方案存在一个严重问题：请求来的时候，没有办法控制将请求交给哪一个进程处理，这样会导致两个问题：
 
 * 多个进程之间会竞争 accpet 一个连接，产生惊群现象，效率比较低。
-* 由于无法控制一个新的连接由哪个进程来处理，必然导致各 worker 进程之间的负载非常不均衡。
+* 由于无法控制一个新的连接由哪个进程来处理，必然导致各 `worker` 进程之间的负载非常不均衡。
 
 ### 方式二：发送socket对象
 
@@ -163,7 +163,7 @@ export NODE_CLUSTER_POLICY=none;
 ```
 
 ## 其他要点
-要提高多进程集群架构的文档性，我们需要做的还有很多，如优雅退出、进程守护等。
+要提高多进程集群架构的稳定性，我们需要做的还有很多，如优雅退出、进程守护等。
 
 ### 优雅退出
 由于`master`进程负责守护子进程，调度任务，所以必须要保证`master`进程足够健壮。当然在`master`挂掉时，也会有其他解决方案，这方面可以参考相关架构思想。
@@ -192,7 +192,13 @@ cluster.on('disconnect', function () {
 ```
 
 ## PM2
-// todo
+`PM2`为`Node`提供进程管理，提供守护进程、监控、日志、平滑重启、集群负载均衡能力等。
+
+这里介绍一个点：
+
+在`PM2`中有两种执行模式：`fork`和`cluster`模式，两者的区别是，`fork`模式使用`fork()`作为创建子进程执行程序的方式，这样可以方便地执行其他非`Node`程序；而`cluster`模式则只针对`Node`可用，因为其使用了`cluster`的一系列API，此中方案可以很方便地创建`cluster`集群。
+
+参考[https://stackoverflow.com/questions/34682035/cluster-and-fork-mode-difference-in-pm2](https://stackoverflow.com/questions/34682035/cluster-and-fork-mode-difference-in-pm2)
 
 ## Nginx
 

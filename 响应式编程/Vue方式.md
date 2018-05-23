@@ -53,11 +53,10 @@ class MVVM {
 
 class Observer {
   constructor(data){
-    let dep = this.dep = new Dep(); // dep理解为Pub/Sub中心，也是data中属性的观察者
     const keys = Object.keys(data);
     for(let key of keys){
       let value = data[key];
-
+      let dep = this.dep = new Dep(); // dep理解为Pub/Sub中心，也是data中属性的观察者
       observe(value); //递归observe
 
       Object.defineProperty(data,key,{
