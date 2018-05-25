@@ -48,11 +48,11 @@
     * 工程实践
 * HTTPS性能影响
     * [TLS原理](/HTTPS性能影响/TLS原理.md)
-    * 性能影响
+    * [性能影响](/HTTPS性能影响/性能影响.md)
 * [高性能JavaScript](/高性能JavaScript/README.md)
     * [V8与JIT](/高性能JavaScript/V8与JIT.md)
     * [内存管理](/高性能JavaScript/内存管理.md)
-    * GC机制
+    * [GC机制](/高性能JavaScript/GC机制.md)
     * 内存泄露
     * 算法与流程
     * Web worker
