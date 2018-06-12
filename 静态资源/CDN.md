@@ -12,7 +12,7 @@
 ## 传统方式
 
 传统方式下用户访问网站示意图:
-![http://7xsi10.com1.z0.glb.clouddn.com/cdn_traditional.png](http://7xsi10.com1.z0.glb.clouddn.com/cdn_traditional.png)
+![/assets/cdn_traditional.png](/assets/cdn_traditional.png)
 
 详细DNS工作过程参考[从输入URL开始](/带宽与延迟/从输入URL开始.md)章节。
 
@@ -26,7 +26,7 @@
 
 加入CDN后的网络架构示意图：
 
-![http://7xsi10.com1.z0.glb.clouddn.com/cdn_addCDN.png](http://7xsi10.com1.z0.glb.clouddn.com/cdn_addCDN.png)
+![/assets/cdn_addCDN.png](/assets/cdn_addCDN.png)
 
 图片来源于《云计算》
 

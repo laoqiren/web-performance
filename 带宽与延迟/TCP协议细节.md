@@ -18,11 +18,11 @@ TCP需要提供以下功能：
 
 应用层的多个进程通过传输层的端口号将应用报文向下交给传输层，然后传输层向下`复用`网络层服务。网络层的IP地址和传输层的端口号共同标识主机上特定的进程，当网络层数据报到达目的主机后，拆包得到运输层segment，通过其中的端口号信息，将应用层报文交给相应的进程，此为`分用`。
 
-![http://7xsi10.com1.z0.glb.clouddn.com/tcp1.png](http://7xsi10.com1.z0.glb.clouddn.com/tcp1.png)
+![/assets/tcp1.png](/assets/tcp1.png)
 
 ## TCP协议的PDU
 一图以明之：
-![http://7xsi10.com1.z0.glb.clouddn.com/tcp_pdu.png](http://7xsi10.com1.z0.glb.clouddn.com/tcp_pdu.png)
+![/assets/tcp_pdu.png](/assets/tcp_pdu.png)
 
 ## 连接建立与释放
 这里将通过抓包分析连接建立和释放过程。
