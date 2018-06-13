@@ -63,7 +63,7 @@
     * 性能提升点
     * 应用场景
 * PWA与离线应用
-* 即时运用与P2P
+* 即时应用与P2P
     * UDP协议
     * WebRTC
     * WebSocket
