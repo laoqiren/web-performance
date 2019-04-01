@@ -29,7 +29,7 @@ TCP需要提供以下功能：
 
 ### 三次握手建立连接
 一图以概之：
-![http://7xsi10.com1.z0.glb.clouddn.com/tcp_hand.jpg](http://7xsi10.com1.z0.glb.clouddn.com/tcp_hand.jpg)
+![http://7xsi10.com1.z0.glb.clouddn.com/tcp_hand.jpg](/assets/tcp_hand.jpg)
 
 访问`luoxia.me`抓包，首先看一下总的流程：
 ![http://7xsi10.com1.z0.glb.clouddn.com/hand_SUm.png](http://7xsi10.com1.z0.glb.clouddn.com/hand_SUm.png)
