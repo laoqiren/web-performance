@@ -14,7 +14,7 @@ V8采取了一系列优化机制提升JS效率，包括JIT编译 （JIT Compile�
 即时编译器则混合了这二者，一句一句编译源代码，但是会将翻译过的代码缓存起来以降低性能损耗。相对于静态编译代码，即时编译的代码可以处理延迟绑定并增强安全性。
 
 JIT运用的地方很多，如`.NET`、`JVM`、`PyPy`等。在多个JS引擎均使用JIT技术提升js执行速度：
-![http://7xsi10.com1.z0.glb.clouddn.com/01-02-perf_graph10-768x633.png](http://7xsi10.com1.z0.glb.clouddn.com/01-02-perf_graph10-768x633.png)
+![/assets/01-02-perf_graph10-768x633.png](/assets/01-02-perf_graph10-768x633.png)
 
 ### 解释与编译
 通常有两种方法将高级语言代码转换为机器代码，`解释`与`编译`。
@@ -29,12 +29,12 @@ JIT运用的地方很多，如`.NET`、`JVM`、`PyPy`等。在多个JS引擎均�
 
 不同的浏览器的JIT实现方式略有区别，但基本思想一致。即在js引擎中加入一个叫做`monitor`的部分来监控代码执行，并记录下每部分代码执行的次数以及使用的类型。如果`monitor`发现同一段代码执行多次，就会将此段代码标记为`warm`，如果执行次数非常多，就将其标记为`hot`。`warm`标记的代码会被放到`baseline compiler`，`hot`标记的代码会被放到`optimizing compiler`：
 
-![http://7xsi10.com1.z0.glb.clouddn.com/02-06-jit09-768x560.png](http://7xsi10.com1.z0.glb.clouddn.com/02-06-jit09-768x560.png)
+![/assets/02-06-jit09-768x560.png](/assets/02-06-jit09-768x560.png)
 
 ### baseline cimpiler
 当某段代码被标记为`warm`，将不直接通过解释执行，而是通过`baseline cimpiler`，`baseline compiler`会存储这段代码的编译结果：
 
-![http://7xsi10.com1.z0.glb.clouddn.com/02-05-jit06-768x565.png](http://7xsi10.com1.z0.glb.clouddn.com/02-05-jit06-768x565.png)
+![/assets/02-05-jit06-768x565.png](/assets/02-05-jit06-768x565.png)
 
 js引擎会为图示中函数的每一行代码生成一个"桩"，"桩"中包含代码行号和变量类型信息，当`monitor`发现同一段代码被执行，且其中变量类型相同，则会输出它之前已经编译好版本。
 
@@ -43,7 +43,7 @@ js引擎会为图示中函数的每一行代码生成一个"桩"，"桩"中包�
 ### Optimizing compiler
 如果某段代码被标记为`hot`，这段代码会被放到`Optimizing compiler`，`Optimizing compiler`会对代码进行更多优化，产生一个执行更快的编译版本并进行存储：
 
-![http://7xsi10.com1.z0.glb.clouddn.com/02-06-jit09-768x560.png](http://7xsi10.com1.z0.glb.clouddn.com/02-06-jit09-768x560.png)
+![/assets/02-06-jit09-768x560.png](/assets/02-06-jit09-768x560.png)
 
 但是`Optimizing compiler`是基于一定假设的，比如，它假设通过某一构造器实例化出来的对象具有完全一样的结构，即拥有的属性相同，且属性顺序相同。
 
@@ -51,7 +51,7 @@ js引擎会为图示中函数的每一行代码生成一个"桩"，"桩"中包�
 
 但是由于JS的动态性，我们不能完全保证此假设成立，尽管是在同一循环期间，对象的结构也会发生变化。所以经过`Optimizing compiler`编译的编译版本在执行之前需要进行检查，如果假设错误，将会丢弃此编译版本，然后将代码交回给解释器或者`baseline cimpiler`，此种行为被称为（弃优化）:
 
-![http://7xsi10.com1.z0.glb.clouddn.com/02-07-jit11-768x555.png](http://7xsi10.com1.z0.glb.clouddn.com/02-07-jit11-768x555.png)
+![/assets/02-07-jit11-768x555.png](/assets/02-07-jit11-768x555.png)
 
 可见，`Optimizing compiler`机制可能会造成一些性能问题，如果js引擎针对某段代码在优化和弃优化直接不断循环，将会导致代码执行速度比没有使用优化机制更慢。
 
@@ -72,15 +72,15 @@ function arraySum(arr) {
 
 但是，我们不能保证`sum`何`arr[i]`一定是整形，因为有可能`arr`的某一项并不是整形，如果其中一项是字符串类型，那么上面的加法操作执行策略就会不一样，需要被编译成新的版本。`JIT`的策略是对每一段代码产生多个"桩"，如果该段代码在执行期间变量类型不变，只会产生一个"桩"，否则会有多个"桩"。这样，该段代码每次执行前都需要进行一个"决策"过程:
 
-![http://7xsi10.com1.z0.glb.clouddn.com/02-08-decision_tree01-768x394.png](http://7xsi10.com1.z0.glb.clouddn.com/02-08-decision_tree01-768x394.png)
+![/assets/02-08-decision_tree01-768x394.png](/assets/02-08-decision_tree01-768x394.png)
 
 这样引擎将会花大量时间在询问相同问题（决策）过程中：
 
-![http://7xsi10.com1.z0.glb.clouddn.com/02-09-jit_loop02-768x496.png](http://7xsi10.com1.z0.glb.clouddn.com/02-09-jit_loop02-768x496.png)
+![/assets/02-09-jit_loop02-768x496.png](/assets/02-09-jit_loop02-768x496.png)
 
 而`Optimizing compiler`的一个优化策略就是简化这样一个决策过程，对于其中一些变量的类型检查提前到循环之前:
 
-![http://7xsi10.com1.z0.glb.clouddn.com/02-10-jit_loop02-768x488.png](http://7xsi10.com1.z0.glb.clouddn.com/02-10-jit_loop02-768x488.png)
+![/assets/02-10-jit_loop02-768x488.png](/assets/02-10-jit_loop02-768x488.png)
 
 有些`JIT`实现会在这方面做更进一步优化，比如firefox定义了一种只含有整数的特别数组，如果`arr`满足条件，上面图中每次执行前关于`arr[i]`的类型检查也可省去。
 
