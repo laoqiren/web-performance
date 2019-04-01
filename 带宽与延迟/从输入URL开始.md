@@ -2,7 +2,7 @@
 这是一个古老的问题，即我们输入URL后按下回车到网页测呈现都发生了什么？
 
 首先来看一张图：
-![](http://7xsi10.com1.z0.glb.clouddn.com/layers.png)
+![/assets/layers.png](/assets/layers.png)
 表示了数据从源端到目的端的封装和拆解过程
 ## 预处理URL
 URL格式：
@@ -33,7 +33,7 @@ http://www.example.com:80/path/to/myfile.html?key1=value1&key2=value2#SomewhereI
 
 我们可以使用命令`dig +trace www.luoxia.me`来跟踪dns查询过程：
 
-![http://7xsi10.com1.z0.glb.clouddn.com/dns.png](http://7xsi10.com1.z0.glb.clouddn.com/dns.png)
+![/assets/dns.png](/assets/dns.png)
 可以清晰地看到这个迭代查询的过程。
 
 ## Socket发送数据
@@ -50,7 +50,7 @@ http://www.example.com:80/path/to/myfile.html?key1=value1&key2=value2#SomewhereI
 * 以太网
 * WiFi
 * 蜂窝移动网络
-![](http://7xsi10.com1.z0.glb.clouddn.com/routers.png)
+![](/assets/routers.png)
 
 数据经过一层层封装，经过本地网络，传送到网络的下一个节点，再到管理该主机所在子网的路由器，这个路由器经过区域内路由(Intra-AS routing)算法（如RIP)将数据发送给`自治区域`(autonomous system, 缩写 AS，如运营商区域网络)的边界路由（网关），再通过区域间路由（Inter-AS routing）算法（如BGP)找到其他域的边界路由，再经过区域内路由算法，直到找到目的主机。
 
@@ -58,7 +58,7 @@ http://www.example.com:80/path/to/myfile.html?key1=value1&key2=value2#SomewhereI
 
 此外，由于IPV4的能够分配的IP有限，我们往往使用`NAT`来进行公网到内网的地址映射：
 
-![](http://7xsi10.com1.z0.glb.clouddn.com/nat.png)
+![](/assets/nat.png)
 
 数据包最终传到目的主机的网卡，接着网卡会将数据拷贝到内存中（DMA），然后通过中断来通知 CPU，经过一层层的拆解到达指定端口的进程进行处理。
 
@@ -71,7 +71,7 @@ http://www.example.com:80/path/to/myfile.html?key1=value1&key2=value2#SomewhereI
 
 以`luoxia.me/images/climb.jpg`为例：
 
-![](http://7xsi10.com1.z0.glb.clouddn.com/http-luoxia.png)
+![/assets/http-luoxia.png](/assets/http-luoxia.png)
 
 访问网页的时候，服务端最终返回html文档，接下来就是网页的渲染过程了，这部分参照[网页渲染原理章节](/网页渲染原理/README.md)。
 
