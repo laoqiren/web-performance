@@ -2,7 +2,7 @@
 
 Webpack看名字就知道它是一个Web应用打包工具。看下面官方的一张图就大概知道其设计理念：
 
-![http://7xsi10.com1.z0.glb.clouddn.com/webpack-intro.png](http://7xsi10.com1.z0.glb.clouddn.com/webpack-intro.png)
+![/assets/webpack-intro.png](/assets/webpack-intro.png)
 
 通过前面的网络资源章节，我们知道资源请求的开销多大，我们要减少网络请求，而Webpack将多个模块打包到少数几个bundle文件以减少资源请求开销。但是否粗暴地将所有资源都打包到一个文件就完美了？非也，事实上我们要考虑的问题更多，我们要充分利用前面讲到的缓存提高性能；我们要考虑到单个bundle文件的大小，不能太大，而是考虑将大的单个文件拆分成几个小的文件从而充分利用浏览器的并行下载能力；我们还要考虑减少不必要的资源请求，使用动态加载（懒加载）来提高性能。
 

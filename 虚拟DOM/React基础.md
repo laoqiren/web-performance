@@ -104,6 +104,6 @@ class  Child extends React.Component {
 * 把上面所记录的差异应用到第一步所构建的真正的DOM树上，视图就更新了
 
 网上看到的一篇文章，讲的`preact`的虚拟DOM实现，和React原理差不多：
-![](http://7xsi10.com1.z0.glb.clouddn.com/1.png)
+![](/assets/react-inter.png)
 
 参照原文：[https://medium.com/@rajaraodv/the-inner-workings-of-virtual-dom-666ee7ad47cf](https://medium.com/@rajaraodv/the-inner-workings-of-virtual-dom-666ee7ad47cf)
