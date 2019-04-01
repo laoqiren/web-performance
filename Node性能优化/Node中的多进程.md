@@ -145,7 +145,7 @@ if(cluster.isMaster){
 每个子进程都会有相应的调用`listen(3000)`，这其中涉及到`cluster`内部对于端口复用方面的特殊处理，具体内部细节这里不详述，本质上最后监听端口的也只是`master`进程，`worker`进程做的只是接受`master`派发的请求进行处理。
 
 在网上找到一张图解：
-![http://7xsi10.com1.z0.glb.clouddn.com/cluster_net.png](http://7xsi10.com1.z0.glb.clouddn.com/cluster_net.png)
+![/assets/cluster_net.png](/assets/cluster_net.png)
 
 ### 负载均衡
 Node v0.11中提供一种`Round-Robin`的策略（调度）来进行分配任务。主进程接受连接，在N个工作进程中，每次选择第`i=(i+1)mod N`个进程来发送连接。Node默认选择`Round-Robin`方式
