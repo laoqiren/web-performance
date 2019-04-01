@@ -29,29 +29,29 @@ TCP需要提供以下功能：
 
 ### 三次握手建立连接
 一图以概之：
-![http://7xsi10.com1.z0.glb.clouddn.com/tcp_hand.jpg](/assets/tcp_hand.jpg)
+![/assets/tcp_hand.jpg](/assets/tcp_hand.jpg)
 
 访问`luoxia.me`抓包，首先看一下总的流程：
-![http://7xsi10.com1.z0.glb.clouddn.com/hand_SUm.png](http://7xsi10.com1.z0.glb.clouddn.com/hand_SUm.png)
+![/assets/hand_SUm.png](/assets/hand_SUm.png)
 #### 第一次握手
 第一次握手由客户端（此处为端口号为60782的Chrome进程)主动向服务端发起，设置初始`Sequence number`(序列号)为0；`Acknowledge number`设为0表示期望接受到的返回包序列号为0；`ACK标志`为0，`Syn`为1。即SYN=1， ACK标志=0表示一个连接请求报文段(SYN用于建立连接时的同步信号):
 
-![http://7xsi10.com1.z0.glb.clouddn.com/hand1.png](http://7xsi10.com1.z0.glb.clouddn.com/hand1.png)
+![/assets/hand1.png](/assets/hand1.png)
 
 #### 第二次握手
 服务端在收到连接建立请求后返回包中：设置初始`Sequence number`(序列号)为0；`Acknowledge number`设为1表示期望下次接受到的请求包序列号为1，同时也通知客户端已经收到0号包；`ACK`标志为1，`Syn`为1。即SYN=1， ACK标志=1表示同意建立连接（ACK标志为1时表示此包为确认包）:
-![http://7xsi10.com1.z0.glb.clouddn.com/hand2.png](http://7xsi10.com1.z0.glb.clouddn.com/hand2.png)
+![/assets/hand2.png](/assets/hand2.png)
 
 #### 第三次握手
 客户端在收到服务端答复后再一次请求：设置`Sequence number`(序列号)为`0+1=1`；`Acknowledge number`设为1表示期望下次接受到的返回包序列号为1，也即告知服务端已经收到服务端发送的0号包；`ACK`标志为1，`Syn`为0。
-![http://7xsi10.com1.z0.glb.clouddn.com/hand3.png](http://7xsi10.com1.z0.glb.clouddn.com/hand3.png)
+![/assets/hand3.png](/assets/hand3.png)
 
 至此，连接建立，方可进行应用数据传输。可以看见，为了可靠传输而需建立连接，这就是握手时延，通常为减少握手时延，使用持久连接技术，这方面会在`http1.x`相关小节详解。
 
 ### 四次挥手释放连接
 
 四次挥手的抓包过程这里就省略了，一图以概之：
-![http://7xsi10.com1.z0.glb.clouddn.com/tcpbye.jpg](http://7xsi10.com1.z0.glb.clouddn.com/tcpbye.jpg)
+![/assets/tcpbye.jpg](/assets/tcpbye.jpg)
 
 图中`2MSL`的`TIME-WAIT`用以保证对方接收到最后的ACK信息。
 
@@ -74,7 +74,7 @@ TCP的拥塞控制手段主要有：慢启动、拥塞避免、快重传、快�
 
 ### 慢启动
 即最开始拥塞窗口（`cwnd`）为1个MSS，经过一个RTT后，若没有出现拥塞，则`cwnd`设置为2,第二个RTT后设置为4，即指数增长，直到达到门限值`ssthresh`。
-![http://7xsi10.com1.z0.glb.clouddn.com/con1.png](http://7xsi10.com1.z0.glb.clouddn.com/con1.png)
+![/assets/con1.png](/assets/con1.png)
 
 ### 拥塞避免
 即`AIMD`中的`AI`（线性增长)，当`cwnd`大于或等于`ssthresh`时，不再以指数增长的形式增加cwnd，而是每个RTT只增加一个MSS大小即`加法增`，避免过早出现网络拥塞。
@@ -103,7 +103,7 @@ if ( dupacks >= 3 ) {
 
 如图：
 
-![http://7xsi10.com1.z0.glb.clouddn.com/con2.png](http://7xsi10.com1.z0.glb.clouddn.com/con2.png)
+![/assets/con2.png](/assets/con2.png)
 
 但是`TCP Reno`存在的问题是，如果同一窗口丢失了多个包时，快重传机制只会重传一个包，剩下的只能等到超时时间到达。现在TCP使用的是`TCP New Reno`算法解决此问题。
 
@@ -112,7 +112,7 @@ if ( dupacks >= 3 ) {
 谈及重传时，需要先介绍几种实现可靠传输协议（停等协议、回退N协议、选择重传协议）中的选择重传协议，TCP使用选择重传协议。
 ### 选择重传协议
 
-![http://7xsi10.com1.z0.glb.clouddn.com/con3.png](http://7xsi10.com1.z0.glb.clouddn.com/con3.png)
+![/assets/con3.png](/assets/con3.png)
 即接收端在收到顺序不对的包时，窗口不滑动，将这些包先放入到缓冲区保存。发送端只重传超时的包。
 
 ### 超时重传
