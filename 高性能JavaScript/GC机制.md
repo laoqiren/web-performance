@@ -16,7 +16,7 @@
 由C++直接分配内存，如`Buffer`。参照后续有关`Buffer和Stream`的小节。
 
 V8堆内外内存分配示意图：
-![https://alinode-assets.oss-cn-hangzhou.aliyuncs.com/caf3b69c-afbe-4426-99c6-25f5ab6203c9.png](https://alinode-assets.oss-cn-hangzhou.aliyuncs.com/caf3b69c-afbe-4426-99c6-25f5ab6203c9.png)
+![/assets/堆内外内存分配.jpg](/assets/堆内外内存分配.jpg)
 
 V8的新生代和老生代空间都是分页的（关于分页机制参考上一节的内存管理）。新生代采用连续的分页，而老生代采用离散的通过链表连接的分页。
 
@@ -80,7 +80,7 @@ GC的动机来源：
 ### 新生代 `Scavenge`
 
 `Scavenge`的基本思想是用空间换时间，将新生代空间平分成两个`semispace`，`live`对象和死亡对象在它们之间不断交换迁移：
-![https://alinode-assets.oss-cn-hangzhou.aliyuncs.com/9a49c1a3-0659-4ec4-962a-3f0c56bc4537.png](https://alinode-assets.oss-cn-hangzhou.aliyuncs.com/9a49c1a3-0659-4ec4-962a-3f0c56bc4537.png)
+![/assets/Scavenge_gc.jpg](/assets/Scavenge_gc.jpg)
 
 新生代的回收过程一般为`stop the world`在这个过程中会有上面提到的优化机制：对象复制迁移的页级别并行和指针指向迁移的并行优化。
 
@@ -95,7 +95,7 @@ GC的动机来源：
 
 紧凑过程也是一个`stop the world` 的过程。紧凑的过程会用到上面提到的优化机制：对象复制迁移的页级别并行和指针指向迁移的并行优化。
 
-![https://alinode-assets.oss-cn-hangzhou.aliyuncs.com/b49cbec0-111e-4742-bfec-6d878b0ca803.png](https://alinode-assets.oss-cn-hangzhou.aliyuncs.com/b49cbec0-111e-4742-bfec-6d878b0ca803.png)
+![/assets/sweeping与compacting.jpg](/assets/sweeping与compacting.jpg)
 
 #### 优化一：增量标记
 标记死亡对象过程会阻塞主线程，如果采用一次性`stop the world`方式会增加`Jank`，可以采用增量方式进行，分解成多次`stop the world`过程。
@@ -106,7 +106,7 @@ GC的动机来源：
 
 这样，整个V8的垃圾回收执行情况如下：
 
-![https://alinode-assets.oss-cn-hangzhou.aliyuncs.com/56b81e93-8410-434a-acfe-d690dff45d99.png](https://alinode-assets.oss-cn-hangzhou.aliyuncs.com/56b81e93-8410-434a-acfe-d690dff45d99.png)
+![/assets/node_gc.jpg](/assets/node_gc.jpg)
 
 
 // todo
